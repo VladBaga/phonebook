@@ -53,14 +53,14 @@ public class PhoneBookServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            ObjectMapper objectMapper = new ObjectMapper();
-            SavePhoneBookRequest savePhoneBookRequest = objectMapper.readValue(req.getReader(), SavePhoneBookRequest.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        SavePhoneBookRequest savePhoneBookRequest = objectMapper.readValue(req.getReader(), SavePhoneBookRequest.class);
 
-            try {
-                phoneBookService.updatePhoneBook(savePhoneBookRequest);
-            } catch (Exception e) {
-                resp.sendError(500, "Internal error: " + e.getMessage());
-            }
+        try {
+            phoneBookService.updatePhoneBook(savePhoneBookRequest);
+        } catch (Exception e) {
+            resp.sendError(500, "Internal error: " + e.getMessage());
+        }
     }
 
     @Override
@@ -68,10 +68,23 @@ public class PhoneBookServlet extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         SavePhoneBookRequest savePhoneBookRequest = objectMapper.readValue(req.getReader(), SavePhoneBookRequest.class);
 
-        try{
+        try {
             phoneBookService.deletePhoneBook(savePhoneBookRequest);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //for Preflight requests
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setAccessControlHeaders(resp);
+        resp.setStatus(HttpServletResponse.SC_OK);
+    }
+
+    private void setAccessControlHeaders(HttpServletResponse resp) {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
     }
 }
