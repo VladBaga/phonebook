@@ -21,4 +21,15 @@ public class PhoneBookService {
         System.out.println("Getting phone-books...");
         return phoneBookRepository.getPhoneBooks();
     }
+
+    public void updatePhoneBook(SavePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
+        System.out.println("Updating phone-book log... ");
+        phoneBookRepository.updatePhoneBook(request);
+    }
+
+
+    public void deletePhoneBook(SavePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
+        System.out.println("Deleting phone-book log... ");
+        phoneBookRepository.deletePhoneBook(request);
+    }
 }

@@ -47,8 +47,31 @@ public class PhoneBookServlet extends HttpServlet {
             resp.getWriter().flush();
 
         } catch (Exception e) {
-            resp.sendError(500,"There was an error processing your request. " + e.getMessage()); //status code = 404 not found
+            resp.sendError(500, "There was an error processing your request. " + e.getMessage()); //status code = 404 not found
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            ObjectMapper objectMapper = new ObjectMapper();
+            SavePhoneBookRequest savePhoneBookRequest = objectMapper.readValue(req.getReader(), SavePhoneBookRequest.class);
+
+            try {
+                phoneBookService.updatePhoneBook(savePhoneBookRequest);
+            } catch (Exception e) {
+                resp.sendError(500, "Internal error: " + e.getMessage());
+            }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        SavePhoneBookRequest savePhoneBookRequest = objectMapper.readValue(req.getReader(), SavePhoneBookRequest.class);
+
+        try{
+            phoneBookService.deletePhoneBook(savePhoneBookRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
-

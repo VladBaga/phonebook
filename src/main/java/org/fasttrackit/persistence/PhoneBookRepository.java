@@ -1,7 +1,10 @@
 package org.fasttrackit.persistence;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
 import org.fasttrackit.domain.PhoneBook;
 import org.fasttrackit.transfer.SavePhoneBookRequest;
+import org.omg.CORBA.PolicyHolder;
 
 import java.io.IOException;
 import java.sql.*;
@@ -23,6 +26,7 @@ public class PhoneBookRepository {
             preparedStatement.executeUpdate();
         }
     }
+
     public List<PhoneBook> getPhoneBooks() throws SQLException, IOException, ClassNotFoundException {
         try (Connection connection = DatabaseConfiguration.getConnection()) {
 
@@ -43,6 +47,31 @@ public class PhoneBookRepository {
                 response.add(phoneBook);
             }
             return response;
+        }
+    }
+
+    public void updatePhoneBook(SavePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
+        try (Connection connection = DatabaseConfiguration.getConnection()) {
+
+            String updateSql = "UPDATE phone_books SET `name` = ? WHERE id = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(updateSql);
+            preparedStatement.setString(1, request.getName());
+            preparedStatement.setString(2, request.getId());
+
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    public void deletePhoneBook(SavePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
+        try (Connection connection = DatabaseConfiguration.getConnection()) {
+
+            String deleteSql = "DELETE FROM phone_books WHERE id = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteSql);
+            preparedStatement.setString(1, request.getId());
+
+            preparedStatement.executeUpdate();
         }
     }
 }
