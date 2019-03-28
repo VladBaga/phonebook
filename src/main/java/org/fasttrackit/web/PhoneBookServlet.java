@@ -22,6 +22,7 @@ public class PhoneBookServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setAccessControlHeaders(resp);
         ObjectMapper objectMapper = new ObjectMapper();
         SavePhoneBookRequest savePhoneBookRequest = objectMapper.readValue(req.getReader(), SavePhoneBookRequest.class);
 
@@ -34,6 +35,7 @@ public class PhoneBookServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setAccessControlHeaders(resp);
         try {
             List<PhoneBook> phoneBooks = phoneBookService.getPhoneBooks();
 
@@ -53,6 +55,8 @@ public class PhoneBookServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setAccessControlHeaders(resp);
+
         ObjectMapper objectMapper = new ObjectMapper();
         SavePhoneBookRequest savePhoneBookRequest = objectMapper.readValue(req.getReader(), SavePhoneBookRequest.class);
 
@@ -65,11 +69,11 @@ public class PhoneBookServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        SavePhoneBookRequest savePhoneBookRequest = objectMapper.readValue(req.getReader(), SavePhoneBookRequest.class);
+        setAccessControlHeaders(resp);
 
+        String id = req.getParameter("id");
         try {
-            phoneBookService.deletePhoneBook(savePhoneBookRequest);
+            phoneBookService.deletePhoneBook(Long.parseLong(id));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,3 +92,5 @@ public class PhoneBookServlet extends HttpServlet {
         resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
     }
 }
+
+//Body or query parameters obj mapper + get parameter = update end-point

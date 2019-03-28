@@ -63,13 +63,13 @@ public class PhoneBookRepository {
         }
     }
 
-    public void deletePhoneBook(SavePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
+    public void deletePhoneBook(long id) throws SQLException, IOException, ClassNotFoundException {
         try (Connection connection = DatabaseConfiguration.getConnection()) {
 
             String deleteSql = "DELETE FROM phone_books WHERE id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(deleteSql);
-            preparedStatement.setString(1, request.getId());
+            preparedStatement.setLong(1, id);
 
             preparedStatement.executeUpdate();
         }

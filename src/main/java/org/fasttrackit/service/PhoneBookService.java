@@ -28,8 +28,9 @@ public class PhoneBookService {
     }
 
 
-    public void deletePhoneBook(SavePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
-        System.out.println("Deleting phone-book log... ");
-        phoneBookRepository.deletePhoneBook(request);
+    public void deletePhoneBook(long id) throws SQLException, IOException, ClassNotFoundException {
+        System.out.println("Deleting phone-book id : " + id);
+        phoneBookRepository.deletePhoneBook(id);
+        System.out.println("Deleted phone-book id : " + id);
     }
 }
