@@ -16,12 +16,14 @@ public class PhoneBookRepository {
     public void createPhoneBook(SavePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
         try (Connection connection = DatabaseConfiguration.getConnection()) {
 
-            String insertSql = "INSERT INTO phone_books (`name`, surname, phoneNumber) VALUES (?, ?, ?)";
+            String insertSql = "INSERT INTO phone_books (`name`, surname, phoneNumber, age) VALUES (?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(insertSql);
             preparedStatement.setString(1, request.getName());
             preparedStatement.setString(2, request.getSurname());
             preparedStatement.setString(3, request.getPhoneNumber());
+            preparedStatement.setString(4, request.getAge());
+
 
             preparedStatement.executeUpdate();
         }
@@ -30,7 +32,7 @@ public class PhoneBookRepository {
     public List<PhoneBook> getPhoneBooks() throws SQLException, IOException, ClassNotFoundException {
         try (Connection connection = DatabaseConfiguration.getConnection()) {
 
-            String query = "SELECT id, `name`, surname, phoneNumber FROM phone_books ORDER BY id DESC"; //tilda (`) reserved keyword for name
+            String query = "SELECT id, `name`, surname, phoneNumber, age FROM phone_books ORDER BY id DESC"; //tilda (`) reserved keyword for name
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -43,6 +45,7 @@ public class PhoneBookRepository {
                 phoneBook.setName(resultSet.getString("name"));
                 phoneBook.setSurname(resultSet.getString("surname"));
                 phoneBook.setPhoneNumber(resultSet.getString("phoneNumber"));
+                phoneBook.setAge(resultSet.getString("age"));
 
                 response.add(phoneBook);
             }

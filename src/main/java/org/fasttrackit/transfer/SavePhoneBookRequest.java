@@ -6,6 +6,7 @@ public class SavePhoneBookRequest {
     private String name;
     private String surname;
     private String phoneNumber;
+    private String age;
 
     public String getId() {
         return id;
@@ -39,12 +40,21 @@ public class SavePhoneBookRequest {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
     @Override
     public String toString() {
         return "SavePhoneBookRequest{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phoneBook='" + phoneNumber + '\'' +
+                ", age='" + age + '\'' +
                 '}';
     }
 }

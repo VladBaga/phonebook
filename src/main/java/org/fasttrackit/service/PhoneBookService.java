@@ -23,8 +23,9 @@ public class PhoneBookService {
     }
 
     public void updatePhoneBook(SavePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
-        System.out.println("Updating phone-book log... ");
+        System.out.println("Updating phone-book log id: " +request);
         phoneBookRepository.updatePhoneBook(request);
+        System.out.println("Updated phone-book log" +request);
     }
 
 

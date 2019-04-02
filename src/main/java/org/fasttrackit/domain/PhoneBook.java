@@ -8,6 +8,8 @@ public class PhoneBook {
     private String name;
     private String surname;
     private String phoneNumber;
+    private String age;
+
 
     public long getId() {
         return id;
@@ -41,6 +43,14 @@ public class PhoneBook {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
     @Override
     public String toString() {
         return "PhoneBook{" +
@@ -48,6 +58,7 @@ public class PhoneBook {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", age='" + age + '\'' +
                 '}';
     }
 }
