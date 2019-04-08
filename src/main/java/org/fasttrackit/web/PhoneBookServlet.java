@@ -5,6 +5,7 @@ import org.fasttrackit.domain.PhoneBook;
 import org.fasttrackit.persistence.PhoneBookRepository;
 import org.fasttrackit.service.PhoneBookService;
 import org.fasttrackit.transfer.SavePhoneBookRequest;
+import org.fasttrackit.transfer.UpdatePhoneBookRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,10 +59,10 @@ public class PhoneBookServlet extends HttpServlet {
         setAccessControlHeaders(resp);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        SavePhoneBookRequest savePhoneBookRequest = objectMapper.readValue(req.getReader(), SavePhoneBookRequest.class);
+        UpdatePhoneBookRequest updatePhoneBookRequest = objectMapper.readValue(req.getReader(), UpdatePhoneBookRequest.class);
 
         try {
-            phoneBookService.updatePhoneBook(savePhoneBookRequest);
+            phoneBookService.updatePhoneBook(updatePhoneBookRequest);
         } catch (Exception e) {
             resp.sendError(500, "Internal error: " + e.getMessage());
         }

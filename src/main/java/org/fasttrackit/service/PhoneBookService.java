@@ -3,6 +3,7 @@ package org.fasttrackit.service;
 import org.fasttrackit.domain.PhoneBook;
 import org.fasttrackit.persistence.PhoneBookRepository;
 import org.fasttrackit.transfer.SavePhoneBookRequest;
+import org.fasttrackit.transfer.UpdatePhoneBookRequest;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -22,10 +23,10 @@ public class PhoneBookService {
         return phoneBookRepository.getPhoneBooks();
     }
 
-    public void updatePhoneBook(SavePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
+    public void updatePhoneBook(UpdatePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
         System.out.println("Updating phone-book log id: " +request);
         phoneBookRepository.updatePhoneBook(request);
-        System.out.println("Updated phone-book log" +request);
+        System.out.println("Updated phone-book log: " +request);
     }
 
 

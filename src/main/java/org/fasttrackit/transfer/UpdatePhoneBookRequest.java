@@ -1,12 +1,13 @@
 package org.fasttrackit.transfer;
 
-public class SavePhoneBookRequest {
+public class UpdatePhoneBookRequest {
 
     private long id;
     private String name;
     private String surname;
-    private String phoneNumber;
-    private String age;
+/*/ private String phoneNumber;
+    private String age;/*/
+
 
     public long getId() {
         return id;
@@ -32,7 +33,7 @@ public class SavePhoneBookRequest {
         this.surname = surname;
     }
 
-    public String getPhoneNumber() {
+   /*/ public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -46,16 +47,16 @@ public class SavePhoneBookRequest {
 
     public void setAge(String age) {
         this.age = age;
-    }
+    }/*/
 
     @Override
     public String toString() {
-        return "SavePhoneBookRequest{" +
-                "name='" + name + '\'' +
+        return "UpdatePhoneBookRequest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", phoneBook='" + phoneNumber + '\'' +
-                ", age='" + age + '\'' +
+               /*/ ", phoneNumber='" + phoneNumber + '\'' +
+                ", age='" + age + '\'' +/*/
                 '}';
     }
 }
-

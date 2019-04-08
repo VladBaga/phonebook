@@ -2,8 +2,10 @@ package org.fasttrackit.persistence;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import org.fasttrackit.domain.PhoneBook;
 import org.fasttrackit.transfer.SavePhoneBookRequest;
+import org.fasttrackit.transfer.UpdatePhoneBookRequest;
 import org.omg.CORBA.PolicyHolder;
 
 import java.io.IOException;
@@ -53,14 +55,15 @@ public class PhoneBookRepository {
         }
     }
 
-    public void updatePhoneBook(SavePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
+    public void updatePhoneBook(UpdatePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
         try (Connection connection = DatabaseConfiguration.getConnection()) {
 
-            String updateSql = "UPDATE phone_books SET `name` = ? WHERE id = ?";
+            String updateSql = "UPDATE phone_books SET `name` = ?, surname = ? WHERE id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(updateSql);
             preparedStatement.setString(1, request.getName());
-            preparedStatement.setString(2, request.getId());
+            preparedStatement.setString(2, request.getSurname());
+            preparedStatement.setLong(3, request.getId());
 
             preparedStatement.executeUpdate();
         }
