@@ -55,15 +55,17 @@ public class PhoneBookRepository {
         }
     }
 
-    public void updatePhoneBook(UpdatePhoneBookRequest request) throws SQLException, IOException, ClassNotFoundException {
+    public void updatePhoneBook(long id, UpdatePhoneBookRequest updatePhoneBookRequest) throws SQLException, IOException, ClassNotFoundException {
         try (Connection connection = DatabaseConfiguration.getConnection()) {
 
-            String updateSql = "UPDATE phone_books SET `name` = ?, surname = ? WHERE id = ?";
+            String updateSql = "UPDATE phone_books SET `name` = ?, surname = ?, age = ?, phoneNumber = ? WHERE id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(updateSql);
-            preparedStatement.setString(1, request.getName());
-            preparedStatement.setString(2, request.getSurname());
-            preparedStatement.setLong(3, request.getId());
+            preparedStatement.setString(1, updatePhoneBookRequest.getName());
+            preparedStatement.setString(2, updatePhoneBookRequest.getSurname());
+            preparedStatement.setString(4, updatePhoneBookRequest.getPhoneNumber());
+            preparedStatement.setString(3, updatePhoneBookRequest.getAge());
+            preparedStatement.setLong(5, id);
 
             preparedStatement.executeUpdate();
         }

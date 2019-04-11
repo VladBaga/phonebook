@@ -2,18 +2,17 @@ package org.fasttrackit.transfer;
 
 public class UpdatePhoneBookRequest {
 
-    private long id;
+    private Long id;
     private String name;
     private String surname;
-/*/ private String phoneNumber;
-    private String age;/*/
+    private String phoneNumber;
+    private String age;
 
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -33,7 +32,7 @@ public class UpdatePhoneBookRequest {
         this.surname = surname;
     }
 
-   /*/ public String getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -47,7 +46,7 @@ public class UpdatePhoneBookRequest {
 
     public void setAge(String age) {
         this.age = age;
-    }/*/
+    }
 
     @Override
     public String toString() {
@@ -55,8 +54,8 @@ public class UpdatePhoneBookRequest {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-               /*/ ", phoneNumber='" + phoneNumber + '\'' +
-                ", age='" + age + '\'' +/*/
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", age='" + age + '\'' +
                 '}';
     }
 }

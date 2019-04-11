@@ -60,9 +60,10 @@ public class PhoneBookServlet extends HttpServlet {
 
         ObjectMapper objectMapper = new ObjectMapper();
         UpdatePhoneBookRequest updatePhoneBookRequest = objectMapper.readValue(req.getReader(), UpdatePhoneBookRequest.class);
+        String id = req.getParameter("id");
 
         try {
-            phoneBookService.updatePhoneBook(updatePhoneBookRequest);
+            phoneBookService.updatePhoneBook(Long.parseLong(id), updatePhoneBookRequest);
         } catch (Exception e) {
             resp.sendError(500, "Internal error: " + e.getMessage());
         }
